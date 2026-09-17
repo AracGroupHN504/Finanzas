@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finanzas Personales</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💰</text></svg>">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div id="app">
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="app-logo">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/>
+                    </svg>
+                </div>
+                <div class="app-title">
+                    <h1 id="appName">Finanzas Personales</h1>
+                    <span class="app-subtitle" data-i18n="app.subtitle">Control financiero</span>
+                </div>
+            </div>
+
+            <button class="sidebar-toggle" id="sidebarToggle" aria-label="Cerrar menú">✕</button>
+
+            <nav class="sidebar-nav" id="sidebarNav">
+                <a href="#" class="nav-item active" data-page="dashboard">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>
+                    <span data-i18n="nav.dashboard">Dashboard</span>
+                </a>
+                <a href="#" class="nav-item" data-page="movements">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>
+                    <span data-i18n="nav.movements">Movimientos</span>
+                </a>
+                <a href="#" class="nav-item" data-page="income">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19V5m0 0l-6 6m6-6l6 6"/></svg>
+                    <span data-i18n="nav.income">Ingresos</span>
+                </a>
+                <a href="#" class="nav-item" data-page="expenses">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14m0 0l6-6m-6 6l-6-6"/></svg>
+                    <span data-i18n="nav.expenses">Gastos</span>
+                </a>
+                <a href="#" class="nav-item" data-page="budget">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+                    <span data-i18n="nav.budget">Presupuesto</span>
+                </a>
+                <a href="#" class="nav-item" data-page="recurring">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    <span data-i18n="nav.recurring">Recurrentes</span>
+                </a>
+                <a href="#" class="nav-item" data-page="debts">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>
+                    <span data-i18n="nav.debts">Deudas</span>
+                </a>
+                <a href="#" class="nav-item" data-page="cards">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
+                    <span data-i18n="nav.cards">Tarjetas</span>
+                </a>
+                <a href="#" class="nav-item" data-page="goals">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+                    <span data-i18n="nav.goals">Metas</span>
+                </a>
+                <a href="#" class="nav-item" data-page="calendar">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+                    <span data-i18n="nav.calendar">Calendario</span>
+                </a>
+                <a href="#" class="nav-item" data-page="reports">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
+                    <span data-i18n="nav.reports">Reportes</span>
+                </a>
+                <a href="#" class="nav-item" data-page="settings">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22a10 10 0 100-20 10 10 0 000 20z"/><circle cx="12" cy="12" r="3"/></svg>
+                    <span data-i18n="nav.settings">Configuración</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <button class="btn btn-primary btn-full" id="btnQuickAdd">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+                    <span data-i18n="nav.quickAdd">Registro rápido</span>
+                </button>
+            </div>
+        </aside>
+
+        <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+        <main class="main-content">
+            <header class="topbar">
+                <button class="menu-btn" id="menuBtn" aria-label="Abrir menú">☰</button>
+                <div class="topbar-search">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+                    <input type="text" id="globalSearch" placeholder="Buscar movimientos...">
+                </div>
+                <div class="topbar-actions">
+                    <div class="notif-wrapper">
+                        <button class="notif-btn" id="notifBtn" aria-label="Alertas" title="Alertas de pago">
+                            <span class="notif-icon">🔔</span>
+                            <span class="notif-badge" id="notifBadge" style="display:none;"></span>
+                        </button>
+                        <div class="notif-panel" id="notifPanel">
+                            <div class="notif-header">
+                                <h4 data-i18n="notif.title">Alertas</h4>
+                                <button class="btn-link" data-action="mark-alerts-read" data-i18n="notif.markAll">Marcar todas leídas</button>
+                            </div>
+                            <div class="notif-list" id="notifList"></div>
+                        </div>
+                    </div>
+                    <span class="currency-badge" id="currencyBadge">HNL (L)</span>
+                    <span class="current-month" id="currentMonth"></span>
+                </div>
+            </header>
+
+            <div class="content" id="content">
+                <!-- Dashboard -->
+                <section id="page-dashboard" class="page active">
+                    <div class="page-header">
+                        <h2 data-i18n="header.dashboard">Dashboard</h2>
+                        <p data-i18n="header.sub.dashboard">Resumen de tu situación financiera</p>
+                    </div>
+
+                    <div class="cards-grid" id="dashboardCards"></div>
+
+                    <div class="dashboard-financial-summary">
+                        <h3>Estado financiero del mes</h3>
+                        <div class="summary-grid" id="financialSummary"></div>
+                    </div>
+
+                    <div class="charts-grid">
+                        <div class="card panel">
+                            <div class="panel-header">
+                                <h3>Gastos por categoría</h3>
+                            </div>
+                            <div class="chart-container"><canvas id="chartCategory"></canvas></div>
+                        </div>
+                        <div class="card panel">
+                            <div class="panel-header">
+                                <h3>Ingresos vs Gastos</h3>
+                            </div>
+                            <div class="chart-container"><canvas id="chartIncomeExpense"></canvas></div>
+                        </div>
+                        <div class="card panel">
+                            <div class="panel-header">
+                                <h3>Presupuesto vs Gasto</h3>
+                            </div>
+                            <div class="chart-container"><canvas id="chartBudget"></canvas></div>
+                        </div>
+                        <div class="card panel">
+                            <div class="panel-header">
+                                <h3>Gastos por método de pago</h3>
+                            </div>
+                            <div class="chart-container"><canvas id="chartMethod"></canvas></div>
+                        </div>
+                        <div class="card panel">
+                            <div class="panel-header">
+                                <h3>Evolución del saldo</h3>
+                            </div>
+                            <div class="chart-container"><canvas id="chartBalance"></canvas></div>
+                        </div>
+                        <div class="card panel">
+                            <div class="panel-header">
+                                <h3>Gastos por mes</h3>
+                            </div>
+                            <div class="chart-container"><canvas id="chartMonthly"></canvas></div>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-bottom">
+                        <div class="recent-transactions card panel">
+                            <div class="panel-header">
+                                <h3>Movimientos recientes</h3>
+                                <button class="btn-link" data-go="movements">Ver todos →</button>
+                            </div>
+                            <div class="table-scroll"><table class="table" id="recentMovements">
+                                <thead>
+                                    <tr><th>Fecha</th><th>Tipo</th><th>Descripción</th><th>Categoría</th><th>Monto</th></tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table></div>
+                        </div>
+                        <div class="upcoming-payments card panel">
+                            <div class="panel-header">
+                                <h3>Pagos próximos</h3>
+                            </div>
+                            <div id="upcomingList"></div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Movimientos -->
+                <section id="page-movements" class="page">
+                    <div class="page-header">
+                        <h2 data-i18n="header.movements">Movimientos</h2>
+                        <p data-i18n="header.sub.movements">Todos tus movimientos financieros</p>
+                        <div class="header-actions">
+                            <button class="btn btn-primary" data-action="new-movement">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+                                Nuevo movimiento
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="filters-bar card">
+                        <div class="filter-group">
+                            <label>Buscar</label>
+                            <input type="text" id="movSearch" placeholder="Buscar...">
+                        </div>
+                        <div class="filter-group">
+                            <label>Tipo</label>
+                            <select id="movTypeFilter">
+                                <option value="">Todos</option>
+                                <option value="income">Ingreso</option>
+                                <option value="expense">Gasto</option>
+                                <option value="transfer">Transferencia</option>
+                                <option value="debt_payment">Pago de deuda</option>
+                                <option value="adjustment">Ajuste</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label>Período</label>
+                            <select id="movPeriodFilter">
+                                <option value="">Todos</option>
+                                <option value="today">Hoy</option>
+                                <option value="yesterday">Ayer</option>
+                                <option value="thisWeek">Esta semana</option>
+                                <option value="thisMonth" selected>Este mes</option>
+                                <option value="lastMonth">Mes anterior</option>
+                                <option value="last3Months">Últimos 3 meses</option>
+                                <option value="last6Months">Últimos 6 meses</option>
+                                <option value="thisYear">Este año</option>
+                                <option value="custom">Rango personalizado</option>
+                            </select>
+                        </div>
+                        <div class="filter-group" id="customDateRange" style="display:none;">
+                            <label>Desde</label>
+                            <input type="date" id="movFromDate">
+                            <label>Hasta</label>
+                            <input type="date" id="movToDate">
+                        </div>
+                        <div class="filter-group">
+                            <label>Categoría</label>
+                            <select id="movCategoryFilter"></select>
+                        </div>
+                        <div class="filter-group">
+                            <label>Método</label>
+                            <select id="movMethodFilter"></select>
+                        </div>
+                        <button class="btn btn-secondary" id="movClearFilters">Limpiar</button>
+                    </div>
+
+                    <div class="card panel">
+                        <div class="table-scroll"><table class="table" id="movementsTable">
+                            <thead>
+                                <tr>
+                                    <th data-sort="date">Fecha</th>
+                                    <th data-sort="type">Tipo</th>
+                                    <th data-sort="description">Descripción</th>
+                                    <th data-sort="category">Categoría</th>
+                                    <th data-sort="account">Cuenta</th>
+                                    <th data-sort="paymentMethod">Método</th>
+                                    <th data-sort="amount">Monto</th>
+                                    <th>Estado</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="movementsTableBody"></tbody>
+                        </table></div>
+                        <div class="pagination" id="movementsPagination"></div>
+                        <div class="empty-state" id="movementsEmpty" style="display:none;">
+                            <p>No hay movimientos que coincidan con tus criterios.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Ingresos -->
+                <section id="page-income" class="page">
+                    <div class="page-header">
+                        <h2 data-i18n="header.income">Ingresos</h2>
+                        <p data-i18n="header.sub.income">Registro de tus ingresos</p>
+                        <div class="header-actions">
+                            <button class="btn btn-primary" data-action="new-income">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+                                Nuevo ingreso
+                            </button>
+                        </div>
+                    </div>
+                    <div class="income-summary cards-grid" id="incomeSummary"></div>
+                    <div class="filters-bar card">
+                        <div class="filter-group">
+                            <label>Buscar</label>
+                            <input type="text" id="incomeSearch" placeholder="Buscar ingreso...">
+                        </div>
+                        <div class="filter-group">
+                            <label>Período</label>
+                            <select id="incomePeriod">
+                                <option value="thisMonth" selected>Este mes</option>
+                                <option value="today">Hoy</option>
+                                <option value="thisWeek">Esta semana</option>
+                                <option value="lastMonth">Mes anterior</option>
+                                <option value="last3Months">Últimos 3 meses</option>
+                                <option value="thisYear">Este año</option>
+                                <option value="all">Todos</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label>Categoría</label>
+                            <select id="incomeCategory"></select>
+                        </div>
+                    </div>
+                    <div class="card panel">
+                        <div class="table-scroll"><table class="table" id="incomeTable">
+                            <thead>
+                                <tr><th>Fecha</th><th>Descripción</th><th>Categoría</th><th>Fuente</th><th>Método</th><th>Monto</th><th>Acciones</th></tr>
+                            </thead>
+                            <tbody id="incomeTableBody"></tbody>
+                        </table></div>
+                        <div class="empty-state" id="incomeEmpty" style="display:none;">
+                            <p>No hay ingresos registrados.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Gastos -->
+                <section id="page-expenses" class="page">
+                    <div class="page-header">
+                        <h2 data-i18n="header.expenses">Gastos</h2>
+                        <p data-i18n="header.sub.expenses">Registro de tus gastos</p>
+                        <div class="header-actions">
+                            <button class="btn btn-primary" data-action="new-expense">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+                                Nuevo gasto
+                            </button>
+                        </div>
+                    </div>
+                    <div class="income-summary cards-grid" id="expenseSummary"></div>
+                    <div class="filters-bar card">
+                        <div class="filter-group">
+                            <label>Buscar</label>
+                            <input type="text" id="expenseSearch" placeholder="Buscar gasto...">
+                        </div>
+                        <div class="filter-group">
+                            <label>Período</label>
+                            <select id="expensePeriod">
+                                <option value="thisMonth" selected>Este mes</option>
+                                <option value="today">Hoy</option>
+                                <option value="thisWeek">Esta semana</option>
+                                <option value="lastMonth">Mes anterior</option>
+                                <option value="last3Months">Últimos 3 meses</option>
+                                <option value="thisYear">Este año</option>
+                                <option value="all">Todos</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label>Categoría</label>
+                            <select id="expenseCategory"></select>
+                        </div>
+                        <div class="filter-group">
+                            <label>Método</label>
+                            <select id="expenseMethod"></select>
+                        </div>
+                        <div class="filter-group">
+                            <label>Recurrente</label>
+                            <select id="expenseRecurrentFilter"><option value="">Todos</option><option value="yes">Sí</option><option value="no">No</option></select>
+                        </div>
+                    </div>
+                    <div class="card panel">
+                        <div class="table-scroll"><table class="table" id="expenseTable">
+                            <thead>
+                                <tr><th>Fecha</th><th>Descripción</th><th>Categoría</th><th>Comercio</th><th>Método</th><th>Monto</th><th>Tipo</th><th>Acciones</th></tr>
+                            </thead>
+                            <tbody id="expenseTableBody"></tbody>
+                        </table></div>
+                        <div class="empty-state" id="expenseEmpty" style="display:none;">
+                            <p>No hay gastos registrados.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Presupuesto -->
+                <section id="page-budget" class="page">
+                    <div class="page-header">
+                        <h2 data-i18n="header.budget">Presupuesto</h2>
+                        <p data-i18n="header.sub.budget">Controla tus límites por categoría</p>
+                        <div class="header-actions">
+                            <button class="btn btn-primary" data-action="new-budget">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+                                Asignar presupuesto
+                            </button>
+                        </div>
+                    </div>
+                    <div class="budget-overview cards-grid" id="budgetOverview"></div>
+                    <div class="card panel">
+                        <h3 class="panel-title">Presupuestos por categoría</h3>
+                        <div id="budgetList"></div>
+                        <div class="empty-state" id="budgetEmpty" style="display:none;">
+                            <p>No hay presupuestos configurados. Asigna límites para cada categoría.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Gastos recurrentes -->
+                <section id="page-recurring" class="page">
+                    <div class="page-header">
+                        <h2 data-i18n="header.recurring">Gastos recurrentes</h2>
+                        <p data-i18n="header.sub.recurring">Pagos que se repiten cada período</p>
+                        <div class="header-actions">
+                            <button class="btn btn-primary" data-action="new-recurring">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+                                Nuevo recurrente
+                            </button>
+                        </div>
+                    </div>
+                    <div class="cards-grid" id="recurringSummary"></div>
+                    <div class="card panel">
+                        <div class="table-scroll"><table class="table" id="recurringTable">
+                            <thead>
+                                <tr><th>Nombre</th><th>Monto</th><th>Frecuencia</th><th>Próximo pago</th><th>Categoría</th><th>Método</th><th>Estado</th><th>Acciones</th></tr>
+                            </thead>
+                            <tbody id="recurringTableBody"></tbody>
+                        </table></div>
+                        <div class="empty-state" id="recurringEmpty" style="display:none;">
+                            <p>No hay gastos recurrentes registrados.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Deudas -->
+                <section id="page-debts" class="page">
+                    <div class="page-header">
+                        <h2 data-i18n="header.debts">Deudas</h2>
+                        <p data-i18n="header.sub.debts">Control de tus deudas y pagos</p>
+                        <div class="header-actions">
+                            <button class="btn btn-primary" data-action="new-debt">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+                                Nueva deuda
+                            </button>
+                        </div>
+                    </div>
+                    <div class="cards-grid" id="debtSummaryCards"></div>
+                    <div class="card panel">
+                        <div class="table-scroll"><table class="table" id="debtTable">
+                            <thead>
+                                <tr><th>Nombre</th><th>Acreedor</th><th>Original</th><th>Pendiente</th><th>Pago mensual</th><th>Interés</th><th>Próximo pago</th><th>Estado</th><th>Acciones</th></tr>
+                            </thead>
+                            <tbody id="debtTableBody"></tbody>
+                        </table></div>
+                        <div class="empty-state" id="debtEmpty" style="display:none;">
+                            <p>No hay deudas registradas.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Tarjetas de crédito -->
+                <section id="page-cards" class="page">
+                    <div class="page-header">
+                        <h2 data-i18n="header.cards">Tarjetas de crédito</h2>
+                        <p data-i18n="header.sub.cards">Control de tus tarjetas</p>
+                        <div class="header-actions">
+                            <button class="btn btn-primary" data-action="new-card">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+                                Nueva tarjeta
+                            </button>
+                        </div>
+                    </div>
+                    <div class="cards-grid" id="cardsGrid"></div>
+                    <div class="card panel">
+                        <div class="table-scroll"><table class="table" id="cardTable">
+                            <thead>
+                                <tr><th>Nombre</th><th>Banco</th><th>Límite</th><th>Utilizado</th><th>Disponible</th><th>Utilización</th><th>Corte</th><th>Pago</th><th>Acciones</th></tr>
+                            </thead>
+                            <tbody id="cardTableBody"></tbody>
+                        </table></div>
+                        <div class="empty-state" id="cardEmpty" style="display:none;">
+                            <p>No hay tarjetas registradas.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Metas de ahorro -->
+                <section id="page-goals" class="page">
+                    <div class="page-header">
+                        <h2 data-i18n="header.goals">Metas de ahorro</h2>
+                        <p data-i18n="header.sub.goals">Define tus objetivos financieros</p>
+                        <div class="header-actions">
+                            <button class="btn btn-primary" data-action="new-goal">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+                                Nueva meta
+                            </button>
+                        </div>
+                    </div>
+                    <div class="cards-grid" id="goalsGrid"></div>
+                </section>
+
+                <!-- Calendario -->
+                <section id="page-calendar" class="page">
+                    <div class="page-header">
+                        <h2 data-i18n="header.calendar">Calendario financiero</h2>
+                        <p data-i18n="header.sub.calendar">Visualiza tus eventos financieros</p>
+                    </div>
+                    <div class="calendar-controls">
+                        <button class="btn btn-secondary" id="calendarPrev">←</button>
+                        <h3 id="calendarMonthLabel"></h3>
+                        <button class="btn btn-secondary" id="calendarNext">→</button>
+                        <button class="btn btn-secondary" id="calendarToday">Hoy</button>
+                    </div>
+                    <div class="calendar-grid" id="calendarGrid"></div>
+                </section>
+
+                <!-- Reportes -->
+                <section id="page-reports" class="page">
+                    <div class="page-header">
+                        <h2 data-i18n="header.reports">Reportes</h2>
+                        <p data-i18n="header.sub.reports">Análisis financiero detallado</p>
+                        <div class="header-actions">
+                            <button class="btn btn-secondary" data-action="export-report">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2"/></svg>
+                                Exportar reporte
+                            </button>
+                        </div>
+                    </div>
+                    <div class="filters-bar card">
+                        <div class="filter-group">
+                            <label>Período</label>
+                            <select id="reportPeriod">
+                                <option value="thisMonth" selected>Este mes</option>
+                                <option value="lastMonth">Mes anterior</option>
+                                <option value="last3Months">Últimos 3 meses</option>
+                                <option value="last6Months">Últimos 6 meses</option>
+                                <option value="thisYear">Este año</option>
+                                <option value="all">Todos</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label>Análisis</label>
+                            <select id="reportType">
+                                <option value="summary" selected>Resumen general</option>
+                                <option value="daily">Por día</option>
+                                <option value="weekly">Por semana</option>
+                                <option value="monthly">Por mes</option>
+                                <option value="category">Por categoría</option>
+                                <option value="method">Por método de pago</option>
+                                <option value="commerce">Por comercio</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label>Formato</label>
+                            <select id="reportFormat">
+                                <option value="html" selected>HTML</option>
+                                <option value="csv">CSV</option>
+                            </select>
+                        </div>
+                        <button class="btn btn-primary" id="btnGenerateReport">Generar reporte</button>
+                    </div>
+                    <div id="reportResults"></div>
+                </section>
+
+                <!-- Configuración -->
+                <section id="page-settings" class="page">
+                    <div class="page-header">
+                        <h2 data-i18n="header.settings">Configuración</h2>
+                        <p data-i18n="header.sub.settings">Personaliza tu aplicación</p>
+                    </div>
+
+                    <div class="settings-grid">
+                        <div class="card panel">
+                            <h3 class="panel-title" data-i18n="set.general">Preferencias generales</h3>
+                            <form id="settingsForm">
+                                <div class="form-group">
+                                    <label data-i18n="set.appName">Nombre de la aplicación</label>
+                                    <input type="text" id="setAppName">
+                                </div>
+                                <div class="form-group">
+                                    <label data-i18n="set.currency">Moneda</label>
+                                    <select id="setCurrency">
+                                        <option value="HNL" selected>Lempira hondureño (HNL / L)</option>
+                                        <option value="USD">Dólar (USD / $)</option>
+                                        <option value="EUR">Euro (EUR / €)</option>
+                                        <option value="GTQ">Quetzal (GTQ / Q)</option>
+                                        <option value="NIO">Córdoba (NIO / C$)</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label data-i18n="set.dateFormat">Formato de fecha</label>
+                                    <select id="setDateFormat">
+                                        <option value="dd/mm/yyyy" selected>DD/MM/YYYY</option>
+                                        <option value="mm/dd/yyyy">MM/DD/YYYY</option>
+                                        <option value="yyyy-mm-dd">YYYY-MM-DD</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label data-i18n="set.language">Idioma</label>
+                                    <select id="setLanguage">
+                                        <option value="es" selected>Español</option>
+                                        <option value="en">English</option>
+                                    </select>
+                                    <span class="form-hint" data-i18n="set.languageHint">Elige el idioma de la interfaz</span>
+                                </div>
+                                <div class="form-group form-group-toggle">
+                                    <div class="toggle-row">
+                                        <div class="toggle-info">
+                                            <label for="setThemeToggle" data-i18n="set.theme">Modo oscuro</label>
+                                            <span class="toggle-hint" data-i18n="set.themeHint">Activa la apariencia oscura de la aplicación</span>
+                                        </div>
+                                        <label class="switch">
+                                            <input type="checkbox" id="setThemeToggle">
+                                            <span class="slider"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label data-i18n="set.lowBalance">Saldo bajo umbral (L)</label>
+                                    <input type="number" id="setLowBalance" step="0.01" min="0">
+                                </div>
+                                <div class="form-group">
+                                    <label data-i18n="set.alertDays">Anticipación de alertas de pago (días)</label>
+                                    <input type="number" id="setAlertDays" step="1" min="0" max="30" value="2">
+                                    <span class="form-hint" data-i18n="set.alertDaysHint">Te avisaremos «hoy», «mañana» y los días previos elegidos.</span>
+                                </div>
+                                <button type="submit" class="btn btn-primary" data-i18n="set.save">Guardar cambios</button>
+                            </form>
+                        </div>
+
+                        <div class="card panel">
+                            <h3 class="panel-title" data-i18n="set.categories">Categorías</h3>
+                            <div class="settings-subsection">
+                                <div class="subtitle-row">
+                                    <h4 data-i18n="set.catExp">Categorías de gasto</h4>
+                                    <button class="btn btn-sm btn-primary" data-action="new-category">+</button>
+                                </div>
+                                <div id="categoryList"></div>
+                            </div>
+                            <div class="settings-subsection" style="margin-top:16px;">
+                                <div class="subtitle-row">
+                                    <h4 data-i18n="set.catInc">Categorías de ingreso</h4>
+                                    <button class="btn btn-sm btn-primary" data-action="new-income-category">+</button>
+                                </div>
+                                <div id="incomeCategoryList"></div>
+                            </div>
+                        </div>
+
+                        <div class="card panel">
+                            <h3 class="panel-title" data-i18n="set.methods">Métodos de pago</h3>
+                            <div class="subtitle-row">
+                                <h4>Métodos</h4>
+                                <button class="btn btn-sm btn-primary" data-action="new-method">+</button>
+                            </div>
+                            <div id="methodsList"></div>
+                        </div>
+
+                        <div class="card panel">
+                            <h3 class="panel-title" data-i18n="set.accounts">Cuentas</h3>
+                            <div class="subtitle-row">
+                                <h4>Cuentas</h4>
+                                <button class="btn btn-sm btn-primary" data-action="new-account">+</button>
+                            </div>
+                            <div id="accountsList"></div>
+                        </div>
+
+                        <div class="card panel settings-datapanel">
+                            <h3 class="panel-title">Datos y copias de seguridad</h3>
+                            <div class="settings-actions">
+                                <button class="btn btn-secondary" data-action="export-json">Exportar JSON</button>
+                                <button class="btn btn-secondary" data-action="import-json">Importar JSON</button>
+                                <button class="btn btn-secondary" data-action="export-backup">Copia de seguridad</button>
+                                <button class="btn btn-secondary" data-action="load-demo">Cargar datos de prueba</button>
+                                <button class="btn btn-danger" data-action="clear-data">Limpiar todos los datos</button>
+                            </div>
+                            <input type="file" id="importFile" accept=".json" style="display:none;">
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal contenedor -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal" id="modalBox">
+            <div class="modal-header">
+                <h3 id="modalTitle"></h3>
+                <button class="modal-close" id="modalClose">✕</button>
+            </div>
+            <div class="modal-body" id="modalBody"></div>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <script src="js/database.js"></script>
+    <script src="js/calculations.js"></script>
+    <script src="js/charts.js"></script>
+    <script src="js/reports.js"></script>
+    <script src="js/import-export.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
